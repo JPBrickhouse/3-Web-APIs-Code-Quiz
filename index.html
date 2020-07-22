@@ -19,34 +19,25 @@
 
         <!-- Top "navigation" bar, containing a link to the high scores page and a countdown timer -->
         <nav class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <a href="./highscores.html">View Highscores</a>
             </div>
-            <div class="col-md-8"></div>
-            <div class="col-md-2">
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
                 <p>Time Remaining: <span></span></p>
             </div>
         </nav>
 
-        <div class="quizQuestions">
-            
-            <article data-question="1">
-                <div class="questionCount">Question 1/2</div>
-                <h2 class=questionContent>Question</h2>
-                <ul class=questionAnswers>
-                    <li>
-
-                    </li>
-                    <li>
-                        
-                    </li>
-                </ul>
-            </article>
-            
-            <article data-question="2">
-                <p>World</p>
-            </article>
-        
+        <div id="quiz">
+            <p>Question Number <span id="questionNumber"></span></p>
+            <p id="questionItself"></p>
+            <div class="answerButtons">
+                <button id="button0">a - <span id="choice0"></span></button>
+                <button id="button1">b - <span id="choice1"></span></button>
+                <button id="button2">c - <span id="choice2"></span></button>
+                <button id="button3">d - <span id="choice3"></span></button>
+            </div>
+            <p id="currentScore"></p>
         </div>
 
 
