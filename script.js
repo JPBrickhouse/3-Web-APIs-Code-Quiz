@@ -15,6 +15,22 @@ var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoi
 
 var currentScoreEl = document.querySelector("#currentScore");
 
+var displayTime = document.querySelector("#time");
+var timeRemaining = 10;
+
+function countdown() {
+    var timerCountdown = setInterval(function(){
+        timeRemaining--;
+        displayTime.textContent = timeRemaining;
+        if (timeRemaining === 0) {
+            clearInterval(timerCountdown);
+        }
+    },1000);
+}
+
+countdown();
+
+
 // Creating a variable that is an object with questions and answers
 var questions = [
     {
@@ -38,11 +54,22 @@ var questions = [
             3: "Test 2d"
         },
         correctAnswer: 2
+    },
+    {
+        questionNum: "3",
+        questionContent: "Question 3?",
+        answerChoices: {
+            0: "Test 3a",
+            1: "Test 3b",
+            2: "Test 3c",
+            3: "Test 3d"
+        },
+        correctAnswer: 0
     }
 ];
 
 
-// Function to displaying the quiz questions and answers
+// Function to display the quiz questions and answers
 function populateQuiz(){
     for (i=0; i<questions.length; i++) {
         questionNumberEl.textContent = questions[i].questionNum;
@@ -50,8 +77,25 @@ function populateQuiz(){
         for (j=0; j<4; j++) {
             answerChoiceArray[j].textContent = questions[i].answerChoices[j];
         }
+        checkAnswer();
     }
 }
 
-// Calling that function to displaying the quiz questions and answers
+// Calling that function to display the quiz questions and answers
 populateQuiz();
+
+function checkAnswer(){
+    var buttonSelected = this.id;
+    console.log(buttonSelected);
+    if (buttonSelected === "button" + questions[i].correctAnswer) {
+        console.log("Correct");
+    }
+    else {
+        console.log("Incorret");
+    }
+}
+
+answerButton0.addEventListener("click",checkAnswer);
+answerButton1.addEventListener("click",checkAnswer);
+answerButton2.addEventListener("click",checkAnswer);
+answerButton3.addEventListener("click",checkAnswer);
