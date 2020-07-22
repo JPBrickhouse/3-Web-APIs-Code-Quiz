@@ -15,7 +15,7 @@ var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoi
 
 var currentScoreEl = document.querySelector("#currentScore");
 
-// Creating a variable with questions and answers
+// Creating a variable that is an object with questions and answers
 var questions = [
     {
         questionNum: "1",
@@ -26,7 +26,7 @@ var questions = [
             2: "Test 1c",
             3: "Test 1d"
         },
-        correctAnswer: "b"
+        correctAnswer: 1
     },
     {
         questionNum: "2",
@@ -37,7 +37,7 @@ var questions = [
             2: "Test 2c",
             3: "Test 2d"
         },
-        correctAnswer: "c"
+        correctAnswer: 2
     }
 ];
 

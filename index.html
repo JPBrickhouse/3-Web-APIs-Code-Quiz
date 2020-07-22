@@ -28,17 +28,21 @@
             </div>
         </nav>
 
-        <div id="quiz">
-            <p>Question Number <span id="questionNumber"></span></p>
-            <p id="questionItself"></p>
-            <div class="answerButtons">
-                <button id="button0">a - <span id="choice0"></span></button>
-                <button id="button1">b - <span id="choice1"></span></button>
-                <button id="button2">c - <span id="choice2"></span></button>
-                <button id="button3">d - <span id="choice3"></span></button>
+        <main class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" id="quiz">
+                <h2>Question Number <span id="questionNumber"></span></h2>
+                <h4 id="questionItself"></h4>
+                <div class="answerButtons">
+                    <button type="button" class="btn btn-secondary" id="button0">a - <span id="choice0"></span></button>
+                    <button type="button" class="btn btn-secondary" id="button1">b - <span id="choice1"></span></button>
+                    <button type="button" class="btn btn-secondary" id="button2">c - <span id="choice2"></span></button>
+                    <button type="button" class="btn btn-secondary" id="button3">d - <span id="choice3"></span></button>
+                </div>
+                <p id="currentScore"></p>
             </div>
-            <p id="currentScore"></p>
-        </div>
+            <div class="col-md-2"></div>
+        </main>
 
 
     </div>
