@@ -20,12 +20,14 @@ var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoi
 
 // --------------------------------------------------
 var displayTime = document.querySelector("#time");
+
 var timeRemaining = 100;
 
 function countdown() {
     var timerCountdown = setInterval(function(){
         timeRemaining--;
         displayTime.textContent = timeRemaining;
+        
         // If time reaches 0
         if (timeRemaining === 0) {
             clearInterval(timerCountdown);
@@ -104,6 +106,19 @@ var questions = [
 ];
 // --------------------------------------------------
 
+// function startQuiz hides the quiz introduction
+// and shows the quizContent
+function startQuiz() {
+    introContent.setAttribute("style","display:none")
+    quizContent.setAttribute("style","display:flex")
+}
+
+function runQuiz() {
+    if (currentQuestion < questions.length) {
+        populateQuestion();
+    }
+}
+
 // Initializing the current question as 0 because it
 // corresponds to the index in the questions object
 // where the first question is located
@@ -118,27 +133,8 @@ function populateQuestion(){
     }
 }
 
-function runQuiz() {
-    if (currentQuestion < questions.length) {
-        populateQuestion();
-        checkAnswer();
-        
-    }   
-}
-
-// function startQuiz hides the quiz introduction
-// and shows the quizContent
-function startQuiz() {
-    introContent.setAttribute("style","display:none")
-    quizContent.setAttribute("style","display:flex")
-}
-
-// running functions when the user clicks the start button
-startButton.addEventListener("click",countdown);
-startButton.addEventListener("click",startQuiz);
-startButton.addEventListener("click",runQuiz);
-
-
+// Writing a function called checkAnswer
+// With the intention that an event is passed into the function
 function checkAnswer(event){
     var buttonSelected = this.id;
     console.log(buttonSelected);
@@ -162,11 +158,19 @@ function checkAnswer(event){
             }
         }
     }
-    
+    // Because the event has been passed in the function, we can call the event
+    // and preventDefault()
+    // Therefore,
     event.preventDefault();
+    
     currentQuestion++
     runQuiz();
 }
+
+// running functions when the user clicks the start button
+startButton.addEventListener("click",countdown);
+startButton.addEventListener("click",startQuiz);
+startButton.addEventListener("click",runQuiz);
 
 
 
