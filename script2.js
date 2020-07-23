@@ -18,7 +18,6 @@ var quizContent = document.querySelector("#quizContent");
 
 var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
 
-// --------------------------------------------------
 var displayTime = document.querySelector("#time");
 
 var timeRemaining = 100;
@@ -48,7 +47,7 @@ function countdown() {
 
     },1000);
 }
-// --------------------------------------------------
+
 // Creating a variable that is an object with questions and answers
 var questions = [
     {
@@ -121,7 +120,7 @@ function startQuiz() {
 // where the first question is located
 var currentQuestion = 0;
 
-// Cycle through the questions in the questions object
+// Populates the currentQuestion from the questions object into their respective fields
 function populateQuestion(){
     questionNumberEl.textContent = questions[currentQuestion].questionNum;
     questionItselfEl.textContent = questions[currentQuestion].questionContent;
@@ -133,7 +132,7 @@ function populateQuestion(){
 // run the quiz
 function runQuiz() {
     if (currentQuestion < questions.length) {
-        // populate the question contents in their respective fields
+        // run the populateQuestion function
         populateQuestion();
     }
 }
@@ -170,7 +169,7 @@ function checkAnswer(event){
     }
     // increase the value of currentQuestion by 1
     currentQuestion++
-    // run the quiz again
+    // run the quiz again, which will now cycle through to the next question
     runQuiz();
 }
 
