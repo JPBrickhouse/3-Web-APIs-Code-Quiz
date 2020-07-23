@@ -6,14 +6,14 @@ var answerButton1 = document.querySelector("#button1");
 var answerButton2 = document.querySelector("#button2");
 var answerButton3 = document.querySelector("#button3");
 
+var startButton = document.querySelector("#startButton");
+
 var answerChoice0 = document.querySelector("#choice0");
 var answerChoice1 = document.querySelector("#choice1");
 var answerChoice2 = document.querySelector("#choice2");
 var answerChoice3 = document.querySelector("#choice3");
 
 var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
-
-var currentScoreEl = document.querySelector("#currentScore");
 
 // --------------------------------------------------
 var displayTime = document.querySelector("#time");
@@ -23,12 +23,14 @@ function countdown() {
     var timerCountdown = setInterval(function(){
         timeRemaining--;
         displayTime.textContent = timeRemaining;
+        // If time reaches 0
         if (timeRemaining === 0) {
             clearInterval(timerCountdown);
         }
+        // If the questions run out, stop the timer, log the timeRemaining
+        // if statement
     },1000);
 }
-countdown();
 // --------------------------------------------------
 // Creating a variable that is an object with questions and answers
 var questions = [
@@ -82,21 +84,29 @@ function runQuiz() {
     if (currentQuestion < questions.length) {
         populateQuestion();
         checkAnswer();
-    }
-    
-    
+    }   
 }
 
-runQuiz();
+
+startButton.addEventListener("click",countdown);
+
+startButton.addEventListener("click",runQuiz);
+
 
 function checkAnswer(){
     var buttonSelected = this.id;
     console.log(buttonSelected);
-    if (buttonSelected === "button" + questions[currentQuestion].correctAnswer) {
+
+    // Logging the correctChoice (aka, the correctAnswer from the questions object)
+    var correctChoice = "button" + questions[currentQuestion].correctAnswer;
+
+    if (buttonSelected === correctChoice) {
         console.log("Correct");
     }
-    else {
-        console.log("Incorret");
+    else if (buttonSelected != correctChoice) {
+        console.log("Incorrect");
+        // Subtracing 10 seconds of time from the if the answer was incorrect
+        // Won't subtract lower than value of 0
         if(timeRemaining>0) {
             if(timeRemaining - 10 <= 0) {
                 return;
