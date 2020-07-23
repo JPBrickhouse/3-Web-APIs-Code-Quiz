@@ -13,13 +13,15 @@ var answerChoice1 = document.querySelector("#choice1");
 var answerChoice2 = document.querySelector("#choice2");
 var answerChoice3 = document.querySelector("#choice3");
 
+var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
+
 var introContent = document.querySelector("#introContent");
 var quizContent = document.querySelector("#quizContent");
 var endContent = document.querySelector("#endContent");
 
-var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
-
 var displayTime = document.querySelector("#time");
+
+var remainingTimeDisplay = document.querySelector("#remainingTime");
 
 var timeRemaining = 100;
 
@@ -30,8 +32,8 @@ function countdown() {
         
         // If time reaches 0
         if (timeRemaining === 0) {
-            endRoutine(); // run the endRoutine
             clearInterval(timerCountdown); // stop the countdown timer
+            endRoutine(); // run the endRoutine
         }
         
         // 0 to n-1 corresponds to the possible indices of the questions object
@@ -44,7 +46,8 @@ function countdown() {
         // (That corresponds to an index that does not exist in the questions object)
         // Therefore, when n > n-1, stop the timer
         if (currentQuestion > (questions.length-1)) {
-            clearInterval(timerCountdown);
+            clearInterval(timerCountdown); // stop the countdown timer
+            endRoutine(); // run the endRoutine
         }
 
     },1000);
@@ -183,11 +186,13 @@ function checkAnswer(event){
     }
 }
 
-// function startQuiz hides the quizContent
+// function endRoutine hides the quizContent
 // and shows the endContent
 function endRoutine() {
     quizContent.setAttribute("style","display:none")
     endContent.setAttribute("style","display:flex")
+    // Also shows the timeRemaining as the user's score
+    remainingTimeDisplay.textContent = timeRemaining;
 }
 
 
