@@ -15,6 +15,7 @@ var answerChoice3 = document.querySelector("#choice3");
 
 var introContent = document.querySelector("#introContent");
 var quizContent = document.querySelector("#quizContent");
+var endContent = document.querySelector("#endContent");
 
 var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
 
@@ -169,9 +170,23 @@ function checkAnswer(event){
     }
     // increase the value of currentQuestion by 1
     currentQuestion++
+    // Depending on the value of currentQuestion...
     // run the quiz again, which will now cycle through to the next question
-    runQuiz();
+    // OR
+    // run the endRoutine, which will display results
+    if (currentQuestion <= (questions.length-1)) {
+        runQuiz();
+    }
+    else if (currentQuestion > (questions.length-1)) {
+        endRoutine();
+    }
 }
+
+function endRoutine() {
+    quizContent.setAttribute("style","display:none")
+    endContent.setAttribute("style","display:flex")
+}
+
 
 // running functions when the user clicks the start button
 startButton.addEventListener("click",countdown);
