@@ -18,6 +18,11 @@ var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoi
 var introContent = document.querySelector("#introContent");
 var quizContent = document.querySelector("#quizContent");
 var endContent = document.querySelector("#endContent");
+var restartContent = document.querySelector("#restartContent");
+
+var submitButton = document.querySelector("#submitButton");
+
+var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
 var displayTime = document.querySelector("#time");
 
@@ -113,7 +118,7 @@ var questions = [
 ];
 // --------------------------------------------------
 
-// function startQuiz hides the quiz introduction
+// function startQuiz hides all the other content
 // and shows the quizContent
 function startQuiz() {
     introContent.setAttribute("style","display:none")
@@ -191,9 +196,22 @@ function checkAnswer(event){
 function endRoutine() {
     quizContent.setAttribute("style","display:none")
     endContent.setAttribute("style","display:flex")
+
     // Also shows the timeRemaining as the user's score
     remainingTimeDisplay.textContent = timeRemaining;
 }
+
+// function submitHighScores hides the endContent
+// and shows the restartContent options
+function submitHighScores () {
+    endContent.setAttribute("style","display:none")
+    restartContent.setAttribute("style","display:flex")
+
+    // Also saves the result to localStorage
+
+
+}
+
 
 
 // running functions when the user clicks the start button
@@ -206,3 +224,6 @@ answerButton0.addEventListener("click",checkAnswer);
 answerButton1.addEventListener("click",checkAnswer);
 answerButton2.addEventListener("click",checkAnswer);
 answerButton3.addEventListener("click",checkAnswer);
+
+// running a function when the submit button is pressed
+submitButton.addEventListener("click",submitHighScores);

@@ -63,45 +63,32 @@
             <div class="col-md-2"></div>
         </main>
 
-        <!-- Add another div here that displays whether the previous response was correct or incorrect -->
-
-        <!-- Add another div here -->
-        <!-- populate it with the results page -->
-        <!-- Show the score and an input form for name -->
-        <!-- Store the score and name in localStorage -->
-        <!-- Load the next div -->
-
+        <!-- The end content that displays after the user has completed the quiz or time has run out -->
         <div class="row" id="endContent" style="display:none">
             <div class="col-md-12">
                     <h2 class="d-flex justify-content-center">RESULTS:</h2>
                     <h3 class="d-flex justify-content-center">Your score is the remaining time.</h3>
                     <h4 class="d-flex justify-content-center">Time remaining: &nbsp; <span id="remainingTime"></span> &nbsp; seconds</h4>
             </div>
-            <div class="col-md-12">
-
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <input class="input-group" type="text" placeholder="Your Name or Initials" name="user-name" id="user-name" />
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-12 d-flex justify-content-center">
+                <button type="button" class="btn btn-success" id="submitButton">Submit!</button>
             </div>
         </div>
 
-        <!-- Add another div here -->
-        <!-- Two buttons will display -->
-        <!-- 1) re-take the quiz OR 2) take you to the highscores-->
-
-        <!-- Then make the highscores.html page -->
-        <!-- Display the info from localStorage -->
-        <!-- Show them sorted in order of high score -->
-        <!-- Two buttons will display at the bottom -->
-        <!-- 1) re-take the quiz OR 2) clear highscores -->
+        <!-- The restart content that lets the user choose how to proceed next! -->
+        <div class="row" id="restartContent" style="display:none">
+            <div class="col d-flex justify-content-center">
+                <a class="btn btn-secondary" id="retakeQuizButton" href="./index.html">Retake Quiz</a>
+                <a class="btn btn-secondary" id="seeHighScoresButton" href="./highscores.html">See High Scores</a>
+            </div>
+        </div>
 
     </div>
-
-
-    
-
-
-
-
-
-
 
     <!-- Bootstrap provide JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
