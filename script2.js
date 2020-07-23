@@ -30,7 +30,8 @@ function countdown() {
         
         // If time reaches 0
         if (timeRemaining === 0) {
-            clearInterval(timerCountdown);
+            endRoutine(); // run the endRoutine
+            clearInterval(timerCountdown); // stop the countdown timer
         }
         
         // 0 to n-1 corresponds to the possible indices of the questions object
@@ -41,7 +42,7 @@ function countdown() {
         // 
         // As this Quiz executes, it will eventually try to set currentQuestion to n
         // (That corresponds to an index that does not exist in the questions object)
-        // Therefore, when n > n-1, end the timer
+        // Therefore, when n > n-1, stop the timer
         if (currentQuestion > (questions.length-1)) {
             clearInterval(timerCountdown);
         }
@@ -171,7 +172,7 @@ function checkAnswer(event){
     // increase the value of currentQuestion by 1
     currentQuestion++
     // Depending on the value of currentQuestion...
-    // run the quiz again, which will now cycle through to the next question
+    // runQuiz again, which will now cycle through to the next question
     // OR
     // run the endRoutine, which will display results
     if (currentQuestion <= (questions.length-1)) {
@@ -182,6 +183,8 @@ function checkAnswer(event){
     }
 }
 
+// function startQuiz hides the quizContent
+// and shows the endContent
 function endRoutine() {
     quizContent.setAttribute("style","display:none")
     endContent.setAttribute("style","display:flex")
