@@ -24,6 +24,13 @@ var submitButton = document.querySelector("#submitButton");
 
 var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
+var userInput = document.querySelector("#userName");
+
+// ------------------------------------------------
+// Initializing an empty highScoresList
+var highScoresListCurrent = [];
+// ------------------------------------------------
+
 var displayTime = document.querySelector("#time");
 
 var remainingTimeDisplay = document.querySelector("#remainingTime");
@@ -116,7 +123,6 @@ var questions = [
         correctAnswer: 1
     }
 ];
-// --------------------------------------------------
 
 // function startQuiz hides all the other content
 // and shows the quizContent
@@ -201,16 +207,38 @@ function endRoutine() {
     remainingTimeDisplay.textContent = timeRemaining;
 }
 
+
+// ------------------------------------------------
+
 // function submitHighScores hides the endContent
 // and shows the restartContent options
-function submitHighScores () {
+function submitHighScores() {
     endContent.setAttribute("style","display:none")
     restartContent.setAttribute("style","display:flex")
 
     // Also saves the result to localStorage
 
+    highScoresListCurrent = JSON.parse(localStorage.getItem("highScoresStorage"));
+    
+    // Check that the name input box isn't empty
+    // Create an array of the users and the scores
+    // Create an object with that information
+    // Save / push that object to the local storage
 
+    var highScoreValue = timeRemaining;
+    var highScoreUser = userInput.value.trim();
+
+    highScoresListCurrent.user = push(highScoreUser);
+    highScoresListCurrent.score = push(highScoreValue);
+
+    localStorage.setItem("highScoresStorage",JSON.stringify(highScoresListCurrent));
 }
+// ------------------------------------------------
+
+
+
+
+
 
 
 
