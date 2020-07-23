@@ -33,12 +33,15 @@ function countdown() {
             clearInterval(timerCountdown);
         }
         
-        // The variable currentQuestion can exist from 0 to 4, inclusive
-        // These values correspond to the index of the questions object
-        // questions.Length equals 5, so 5-1 = 4
-        // As this Quiz executes, it will eventually try to set currentQuestion to 5
+        // 0 to n-1 corresponds to the possible indices of the questions object
+        // Therefore, variable currentQuestion can only successfully exist from 0 to n-1
+        // since it is sourcing the questions from the indices of the questions object
+        // 
+        // questions.Length equals n
+        // 
+        // As this Quiz executes, it will eventually try to set currentQuestion to n
         // (That corresponds to an index that does not exist in the questions object)
-        // Therefore, when 5 > 4, end the timer
+        // Therefore, when n > n-1, end the timer
         if (currentQuestion > (questions.length-1)) {
             clearInterval(timerCountdown);
         }
@@ -113,18 +116,12 @@ function startQuiz() {
     quizContent.setAttribute("style","display:flex")
 }
 
-function runQuiz() {
-    if (currentQuestion < questions.length) {
-        populateQuestion();
-    }
-}
-
 // Initializing the current question as 0 because it
 // corresponds to the index in the questions object
 // where the first question is located
 var currentQuestion = 0;
 
-// Cylce through the questions in the questions object
+// Cycle through the questions in the questions object
 function populateQuestion(){
     questionNumberEl.textContent = questions[currentQuestion].questionNum;
     questionItselfEl.textContent = questions[currentQuestion].questionContent;
@@ -133,9 +130,22 @@ function populateQuestion(){
     }
 }
 
+// run the quiz
+function runQuiz() {
+    if (currentQuestion < questions.length) {
+        // populate the question contents in their respective fields
+        populateQuestion();
+    }
+}
+
 // Writing a function called checkAnswer
-// With the intention that an event is passed into the function
+// with the intention that an event is passed into the function
 function checkAnswer(event){
+    // Because the event has been passed in the function, we can call the event
+    // and preventDefault() behavior
+    // Therefore, it will wait for a button push before executing the function
+    event.preventDefault();
+
     var buttonSelected = this.id;
     console.log(buttonSelected);
 
@@ -158,12 +168,9 @@ function checkAnswer(event){
             }
         }
     }
-    // Because the event has been passed in the function, we can call the event
-    // and preventDefault()
-    // Therefore,
-    event.preventDefault();
-    
+    // increase the value of currentQuestion by 1
     currentQuestion++
+    // run the quiz again
     runQuiz();
 }
 
@@ -172,8 +179,7 @@ startButton.addEventListener("click",countdown);
 startButton.addEventListener("click",startQuiz);
 startButton.addEventListener("click",runQuiz);
 
-
-
+// running functions when the user clicks any of the answer buttons
 answerButton0.addEventListener("click",checkAnswer);
 answerButton1.addEventListener("click",checkAnswer);
 answerButton2.addEventListener("click",checkAnswer);
