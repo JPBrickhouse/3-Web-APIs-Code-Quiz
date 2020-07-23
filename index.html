@@ -28,13 +28,18 @@
             </div>
         </nav>
 
-        <div class="row" id="introContent">
+        <!-- The introContent, introducing the Quiz prior to pressing start -->
+        <div class="row" id="introContent" style="display:block">
             <div class="col">
                 <div class="d-flex justify-content-center">
-                    <h1>Quiz Title!</h1>
+                    <h1 class="text-center">HW4: Coding Quiz Challenge!</h1>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <p>Quiz Introduction Paragraph</p>
+                    <p class="text-center">This quiz has 5 questions.<br>
+                    Time starts at 100 seconds.<br>
+                    Correct answers do not impact your time.<br>
+                    Wrong answers reduce your time by 10 seconds.<br>
+                    Your final score is the remaining time.</p>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button type="button" class="btn btn-primary" id="startButton">Start</button>
@@ -42,7 +47,8 @@
             </div>
         </div>
         
-        <main class="row" id="questionContent">
+        <!-- The quizContent, which displays after pressing start -->
+        <main class="row" id="quizContent" style="display:none">
             <div class="col-md-2"></div>
             <div class="col-md-8" id="quiz">
                 <h2>Question Number <span id="questionNumber"></span></h2>

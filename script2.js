@@ -13,6 +13,9 @@ var answerChoice1 = document.querySelector("#choice1");
 var answerChoice2 = document.querySelector("#choice2");
 var answerChoice3 = document.querySelector("#choice3");
 
+var introContent = document.querySelector("#introContent");
+var quizContent = document.querySelector("#quizContent");
+
 var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
 
 // --------------------------------------------------
@@ -27,8 +30,17 @@ function countdown() {
         if (timeRemaining === 0) {
             clearInterval(timerCountdown);
         }
-        // If the questions run out, stop the timer, log the timeRemaining
-        // if statement
+        
+        // The variable currentQuestion can exist from 0 to 4, inclusive
+        // These values correspond to the index of the questions object
+        // questions.Length equals 5, so 5-1 = 4
+        // As this Quiz executes, it will eventually try to set currentQuestion to 5
+        // (That corresponds to an index that does not exist in the questions object)
+        // Therefore, when 5 > 4, end the timer
+        if (currentQuestion > (questions.length-1)) {
+            clearInterval(timerCountdown);
+        }
+
     },1000);
 }
 // --------------------------------------------------
@@ -38,10 +50,10 @@ var questions = [
         questionNum: "1",
         questionContent: "Question 1?",
         answerChoices: {
-            0: "Test 1a",
-            1: "Test 1b",
-            2: "Test 1c",
-            3: "Test 1d"
+            0: "Incorrect",
+            1: "Correct",
+            2: "Incorrect",
+            3: "Incorrect"
         },
         correctAnswer: 1
     },
@@ -49,10 +61,10 @@ var questions = [
         questionNum: "2",
         questionContent: "Question 2?",
         answerChoices: {
-            0: "Test 2a",
-            1: "Test 2b",
-            2: "Test 2c",
-            3: "Test 2d"
+            0: "Incorrect",
+            1: "Incorrect",
+            2: "Correct",
+            3: "Incorrect"
         },
         correctAnswer: 2
     },
@@ -60,18 +72,44 @@ var questions = [
         questionNum: "3",
         questionContent: "Question 3?",
         answerChoices: {
-            0: "Test 3a",
-            1: "Test 3b",
-            2: "Test 3c",
-            3: "Test 3d"
+            0: "Correct",
+            1: "Incorrect",
+            2: "Incorrect",
+            3: "Incorrect"
         },
         correctAnswer: 0
+    },
+    {
+        questionNum: "4",
+        questionContent: "Question 4?",
+        answerChoices: {
+            0: "Incorrect",
+            1: "Incorrect",
+            2: "Incorrect",
+            3: "Correct"
+        },
+        correctAnswer: 3
+    },
+    {
+        questionNum: "5",
+        questionContent: "Question 5?",
+        answerChoices: {
+            0: "Incorrect",
+            1: "Correct",
+            2: "Incorrect",
+            3: "Incorrect"
+        },
+        correctAnswer: 1
     }
 ];
 // --------------------------------------------------
 
+// Initializing the current question as 0 because it
+// corresponds to the index in the questions object
+// where the first question is located
 var currentQuestion = 0;
 
+// Cylce through the questions in the questions object
 function populateQuestion(){
     questionNumberEl.textContent = questions[currentQuestion].questionNum;
     questionItselfEl.textContent = questions[currentQuestion].questionContent;
@@ -84,20 +122,28 @@ function runQuiz() {
     if (currentQuestion < questions.length) {
         populateQuestion();
         checkAnswer();
+        
     }   
 }
 
+// function startQuiz hides the quiz introduction
+// and shows the quizContent
+function startQuiz() {
+    introContent.setAttribute("style","display:none")
+    quizContent.setAttribute("style","display:flex")
+}
 
+// running functions when the user clicks the start button
 startButton.addEventListener("click",countdown);
-
+startButton.addEventListener("click",startQuiz);
 startButton.addEventListener("click",runQuiz);
 
 
-function checkAnswer(){
+function checkAnswer(event){
     var buttonSelected = this.id;
     console.log(buttonSelected);
 
-    // Logging the correctChoice (aka, the correctAnswer from the questions object)
+    // variable for the correctChoice (aka, the correctAnswer from the questions object)
     var correctChoice = "button" + questions[currentQuestion].correctAnswer;
 
     if (buttonSelected === correctChoice) {
@@ -116,7 +162,13 @@ function checkAnswer(){
             }
         }
     }
+    
+    event.preventDefault();
+    currentQuestion++
+    runQuiz();
 }
+
+
 
 answerButton0.addEventListener("click",checkAnswer);
 answerButton1.addEventListener("click",checkAnswer);
