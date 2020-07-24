@@ -17,20 +17,22 @@
 <body>
 
     <div class="container">
+
+        <!-- Showing buttons to retake the quiz OR clear the high scores list -->
         <div class="row" id="restartContent" style="display:flex">
             <div class="col d-flex justify-content-center">
                 <a class="btn btn-primary" id="retakeQuizButton" href="./index.html">Retake Quiz</a>
                 <button type="button" class="btn btn-danger" id="clearHighScoresButton">Clear High Scores</button>
             </div>
-        </div>    
+        </div>
+        <br>
+        <h2 class="d-flex justify-content-center">Unsorted List of High Scores!</h2>
+        <!-- the actual high scores list -->
+        <div class="row d-flex justify-content-center" style="display:flex">
+            <ul id="highScoreIndex"></ul>
+        </div>
+
     </div>
-
-    <!-- Display the info from localStorage -->
-    <!-- Show them sorted in order of high score -->
-
-
-
-
     
     <!-- Bootstrap provide JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

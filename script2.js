@@ -26,13 +26,10 @@ var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
 var userInput = document.querySelector("#userName");
 
-// Initializing an empty highScoresList array
-var highScoresListCurrent = [];
+var highScoreIndex = document.querySelector("#highScoreIndex");
 
 var displayTime = document.querySelector("#time");
-
 var remainingTimeDisplay = document.querySelector("#remainingTime");
-
 var timeRemaining = 100;
 
 function countdown() {
@@ -63,7 +60,7 @@ function countdown() {
     }, 1000);
 }
 
-// Creating a variable that is an object with questions and answers
+// Creating a variable that is an array of objects with questions and answers
 var questions = [
     {
         questionNum: "1",
@@ -225,9 +222,12 @@ function submitHighScores() {
 
     // The submitHighScores function ALSO does the following...
 
+    // Initializes an empty array
+    var highScoresListCurrent = [];
+
     // Runs an if else statement, which checks to see if values exist in localStorage
-    // had to do this because if the highScoresStorage was null,
-    // the push function below wouldn't work
+    // (Had to do this because if the highScoresStorage was null,
+    // the push function below wouldn't work...)
 
     // if the highScoresStorage in localStorage is null,
     // then use the empty array initialized earlier
@@ -244,8 +244,8 @@ function submitHighScores() {
     // Creates an object called highScoreNew
     // This contains the newest high score, as recorded when the submit was pushed
     var highScoreNew = {
-        user: timeRemaining,
-        score: userInput.value.trim()
+        score: timeRemaining,
+        user: userInput.value.trim()
     };
 
     // pushes the highScoreNew object into the highScoreListCurrent array
@@ -256,14 +256,62 @@ function submitHighScores() {
     localStorage.setItem("highScoresStorage", JSON.stringify(highScoresListCurrent));
 }
 
+//------------------------------------------------
+
+// function that renders the high scores
+function renderHighScores () {
+
+    // If the clearHighScoresButton is true (i.e. if it exists and is showing),
+    // then continue with the rest of the function.
+    // (Don't want this function running on the index.html page...
+    // only on the highscores.html page)
+    if (clearHighScoresButton) {
+        
+        // Initializes an empty array
+        var highScoresListCurrent = [];
+
+        if (localStorage.getItem("highScoresStorage") === null) {
+            highScoresListCurrent;
+        }
+        else {
+            highScoresListCurrent = JSON.parse(localStorage.getItem("highScoresStorage"));
+        }
+
+        for (var i=0 ; i < highScoresListCurrent.length; i++) {
+            var userOutput = highScoresListCurrent[i].user
+            var scoreOuput = highScoresListCurrent[i].score
+
+            var li = document.createElement("li");
+            li.textContent = userOutput + " - " + scoreOuput;
+            highScoreIndex.append(li);
+        }
+    }
+}
+
+// the renderHighScores function exists on both html pages
+// BUT, within that function, it is couched in an if statement
+// If the clearHighScoresButton is true (i.e. if it exists and is showing),
+// then continue with the rest of the function
+renderHighScores();
+
+//------------------------------------------------
+
+
 // function clears the high scores
 function clearHighScores() {
     localStorage.clear();
+    renderHighScores();
 }
+// Need to clear the list from the high scores page when the button is pushed, too
+
+
+//------------------------------------------------
 
 // These eventListeners below are "global"
 // They are couched in if statements
 // If the startButton is true (i.e. if it exists and is showing),
+// then addEventListeners to the button
+// If the clearHighScoresButton is true (i.e. if it exists and is showing),
 // then addEventListeners to the button
 
 // running functions when the user clicks the start button
