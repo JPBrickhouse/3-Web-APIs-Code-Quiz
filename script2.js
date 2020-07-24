@@ -26,10 +26,8 @@ var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
 var userInput = document.querySelector("#userName");
 
-// ------------------------------------------------
 // Initializing an empty highScoresList array
 var highScoresListCurrent = [];
-// ------------------------------------------------
 
 var displayTime = document.querySelector("#time");
 
@@ -129,11 +127,6 @@ function startQuiz() {
     introContent.setAttribute("style", "display:none")
     // shows the quizContent
     quizContent.setAttribute("style", "display:flex")
-
-    answerButton0.addEventListener("click", checkAnswer);
-    answerButton1.addEventListener("click", checkAnswer);
-    answerButton2.addEventListener("click", checkAnswer);
-    answerButton3.addEventListener("click", checkAnswer);
 }
 
 // Initializing the current question as 0 because it
@@ -156,6 +149,13 @@ function runQuiz() {
         // run the populateQuestion function
         populateQuestion();
     }
+    // Putting the event listeners here so that way they are only active
+    // when the runQuiz function is active and the buttons are showing.
+    // When the answerButtons are pressed, run checkAnswer.
+    answerButton0.addEventListener("click", checkAnswer);
+    answerButton1.addEventListener("click", checkAnswer);
+    answerButton2.addEventListener("click", checkAnswer);
+    answerButton3.addEventListener("click", checkAnswer);
 }
 
 // Writing a function called checkAnswer
@@ -211,6 +211,9 @@ function endRoutine() {
     // Also shows the timeRemaining as the user's score
     remainingTimeDisplay.textContent = timeRemaining;
 
+    // Putting the event listener here so that way it's only active
+    // when the endRoutine function is active and the button is showing.
+    // When the submit button is pressed, run submitHighScores.
     submitButton.addEventListener("click", submitHighScores);
 }
 
@@ -258,37 +261,19 @@ function clearHighScores() {
     localStorage.clear();
 }
 
+// These eventListeners below are "global"
+// They are couched in if statements
+// If the startButton is true (i.e. if it exists and is showing),
+// then addEventListeners to the button
+
 // running functions when the user clicks the start button
-if(startButton) {
-    startButton.addEventListener("click",countdown);
-    startButton.addEventListener("click",startQuiz);
-    startButton.addEventListener("click",runQuiz);
+if (startButton) {
+    startButton.addEventListener("click", countdown);
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener("click", runQuiz);
 }
 
-// running functions when the user clicks any of the answer buttons
-// switch (startButton || answerButton0) {
-//     case startButton:
-//         startButton.addEventListener("click", countdown);
-//         startButton.addEventListener("click", startQuiz);
-//         startButton.addEventListener("click", runQuiz);
-//         break;
-//     case answerButton0:
-//         answerButton0.addEventListener("click", checkAnswer);
-//         answerButton1.addEventListener("click", checkAnswer);
-//         answerButton2.addEventListener("click", checkAnswer);
-//         answerButton3.addEventListener("click", checkAnswer);
-//         break;
-// }
-
-// answerButton0.addEventListener("click",checkAnswer);
-// answerButton1.addEventListener("click",checkAnswer);
-// answerButton2.addEventListener("click",checkAnswer);
-// answerButton3.addEventListener("click",checkAnswer);
-
-// running a function when the submit button is pressed
-// submitButton.addEventListener("click", submitHighScores);
-
 // running a function when the clear high scores button is pressed
-if(clearHighScoresButton) {
+if (clearHighScoresButton) {
     clearHighScoresButton.addEventListener("click", clearHighScores);
 }
