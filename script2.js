@@ -27,7 +27,7 @@ var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 var userInput = document.querySelector("#userName");
 
 // ------------------------------------------------
-// Initializing an empty highScoresList
+// Initializing an empty highScoresList array
 var highScoresListCurrent = [];
 // ------------------------------------------------
 
@@ -124,10 +124,10 @@ var questions = [
     }
 ];
 
-// function startQuiz hides all the other content
-// and shows the quizContent
 function startQuiz() {
+    // hides the introContent
     introContent.setAttribute("style","display:none")
+    // shows the quizContent
     quizContent.setAttribute("style","display:flex")
 }
 
@@ -197,48 +197,63 @@ function checkAnswer(event){
     }
 }
 
-// function endRoutine hides the quizContent
-// and shows the endContent
 function endRoutine() {
+    // hides the quizContent
     quizContent.setAttribute("style","display:none")
+    // shows the endContent
     endContent.setAttribute("style","display:flex")
 
     // Also shows the timeRemaining as the user's score
     remainingTimeDisplay.textContent = timeRemaining;
 }
 
-
 // ------------------------------------------------
 
-// function submitHighScores hides the endContent
-// and shows the restartContent options
 function submitHighScores() {
+    // hides the endContent
     endContent.setAttribute("style","display:none")
+    // shows the restartContent options
     restartContent.setAttribute("style","display:flex")
 
-    // Also saves the result to localStorage
+    // The submitHighScores function ALSO does the following...
 
-    highScoresListCurrent = JSON.parse(localStorage.getItem("highScoresStorage"));
-    
-    // Check that the name input box isn't empty
-    // Create an array of the users and the scores
-    // Create an object with that information
-    // Save / push that object to the local storage
+    // Runs an if else statement, which checks to see if values exist in localStorage
+    // had to do this because if the highScoresStorage was null,
+    // the push function below wouldn't work
 
-    var highScoreValue = timeRemaining;
-    var highScoreUser = userInput.value.trim();
+    // if the highScoresStorage in localStorage is null,
+    // then use the empty array initialized earlier
+    if (localStorage.getItem("highScoresStorage")===null){
+        highScoresListCurrent;
+    }
+    // else: this means that highScoresStorage has values
+    // Therefore, use getItem to get the highScoresStorage array from localStorage
+    // and make that array as the highScoresListCurrent array
+    else {
+        highScoresListCurrent = JSON.parse(localStorage.getItem("highScoresStorage"));
+    }
 
-    highScoresListCurrent.user = push(highScoreUser);
-    highScoresListCurrent.score = push(highScoreValue);
+    // Creates an object called highScoreNew
+    // This contains the newest high score, as recorded when the submit was pushed
+    var highScoreNew = {
+        user: timeRemaining,
+        score: userInput.value.trim()
+    };
 
+    // pushes the highScoreNew object into the highScoreListCurrent array
+    // (This action updates the overall array)
+    highScoresListCurrent.push(highScoreNew);
+
+    // sets that overall array as the new version of the array in localStorage
     localStorage.setItem("highScoresStorage",JSON.stringify(highScoresListCurrent));
 }
+
 // ------------------------------------------------
-
-
-
-
-
+// function clears the high scores
+function clearHighScores() {
+    localStorage.clear();
+}
+// ------------------------------------------------
 
 
 
@@ -255,3 +270,6 @@ answerButton3.addEventListener("click",checkAnswer);
 
 // running a function when the submit button is pressed
 submitButton.addEventListener("click",submitHighScores);
+
+// running a function when the clear high scores button is pressed
+clearHighScoresButton.addEventListener("click",clearHighScores);
