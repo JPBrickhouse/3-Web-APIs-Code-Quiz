@@ -38,16 +38,16 @@ var remainingTimeDisplay = document.querySelector("#remainingTime");
 var timeRemaining = 100;
 
 function countdown() {
-    var timerCountdown = setInterval(function(){
+    var timerCountdown = setInterval(function () {
         timeRemaining--;
         displayTime.textContent = timeRemaining;
-        
+
         // If time reaches 0
         if (timeRemaining === 0) {
             clearInterval(timerCountdown); // stop the countdown timer
             endRoutine(); // run the endRoutine
         }
-        
+
         // 0 to n-1 corresponds to the possible indices of the questions object
         // Therefore, variable currentQuestion can only successfully exist from 0 to n-1
         // since it is sourcing the questions from the indices of the questions object
@@ -57,12 +57,12 @@ function countdown() {
         // As this Quiz executes, it will eventually try to set currentQuestion to n
         // (That corresponds to an index that does not exist in the questions object)
         // Therefore, when n > n-1, stop the timer
-        if (currentQuestion > (questions.length-1)) {
+        if (currentQuestion > (questions.length - 1)) {
             clearInterval(timerCountdown); // stop the countdown timer
             endRoutine(); // run the endRoutine
         }
 
-    },1000);
+    }, 1000);
 }
 
 // Creating a variable that is an object with questions and answers
@@ -126,9 +126,14 @@ var questions = [
 
 function startQuiz() {
     // hides the introContent
-    introContent.setAttribute("style","display:none")
+    introContent.setAttribute("style", "display:none")
     // shows the quizContent
-    quizContent.setAttribute("style","display:flex")
+    quizContent.setAttribute("style", "display:flex")
+
+    answerButton0.addEventListener("click", checkAnswer);
+    answerButton1.addEventListener("click", checkAnswer);
+    answerButton2.addEventListener("click", checkAnswer);
+    answerButton3.addEventListener("click", checkAnswer);
 }
 
 // Initializing the current question as 0 because it
@@ -137,10 +142,10 @@ function startQuiz() {
 var currentQuestion = 0;
 
 // Populates the currentQuestion from the questions object into their respective fields
-function populateQuestion(){
+function populateQuestion() {
     questionNumberEl.textContent = questions[currentQuestion].questionNum;
     questionItselfEl.textContent = questions[currentQuestion].questionContent;
-    for (j=0; j<4; j++) {
+    for (j = 0; j < 4; j++) {
         answerChoiceArray[j].textContent = questions[currentQuestion].answerChoices[j];
     }
 }
@@ -155,7 +160,7 @@ function runQuiz() {
 
 // Writing a function called checkAnswer
 // with the intention that an event is passed into the function
-function checkAnswer(event){
+function checkAnswer(event) {
     // Because the event has been passed in the function, we can call the event
     // and preventDefault() behavior
     // Therefore, it will wait for a button push before executing the function
@@ -174,8 +179,8 @@ function checkAnswer(event){
         console.log("Incorrect");
         // Subtracing 10 seconds of time from the if the answer was incorrect
         // Won't subtract lower than value of 0
-        if(timeRemaining>0) {
-            if(timeRemaining - 10 <= 0) {
+        if (timeRemaining > 0) {
+            if (timeRemaining - 10 <= 0) {
                 return;
             }
             else {
@@ -189,31 +194,31 @@ function checkAnswer(event){
     // runQuiz again, which will now cycle through to the next question
     // OR
     // run the endRoutine, which will display results
-    if (currentQuestion <= (questions.length-1)) {
+    if (currentQuestion <= (questions.length - 1)) {
         runQuiz();
     }
-    else if (currentQuestion > (questions.length-1)) {
+    else if (currentQuestion > (questions.length - 1)) {
         endRoutine();
     }
 }
 
 function endRoutine() {
     // hides the quizContent
-    quizContent.setAttribute("style","display:none")
+    quizContent.setAttribute("style", "display:none")
     // shows the endContent
-    endContent.setAttribute("style","display:flex")
+    endContent.setAttribute("style", "display:flex")
 
     // Also shows the timeRemaining as the user's score
     remainingTimeDisplay.textContent = timeRemaining;
-}
 
-// ------------------------------------------------
+    submitButton.addEventListener("click", submitHighScores);
+}
 
 function submitHighScores() {
     // hides the endContent
-    endContent.setAttribute("style","display:none")
+    endContent.setAttribute("style", "display:none")
     // shows the restartContent options
-    restartContent.setAttribute("style","display:flex")
+    restartContent.setAttribute("style", "display:flex")
 
     // The submitHighScores function ALSO does the following...
 
@@ -223,7 +228,7 @@ function submitHighScores() {
 
     // if the highScoresStorage in localStorage is null,
     // then use the empty array initialized earlier
-    if (localStorage.getItem("highScoresStorage")===null){
+    if (localStorage.getItem("highScoresStorage") === null) {
         highScoresListCurrent;
     }
     // else: this means that highScoresStorage has values
@@ -245,31 +250,45 @@ function submitHighScores() {
     highScoresListCurrent.push(highScoreNew);
 
     // sets that overall array as the new version of the array in localStorage
-    localStorage.setItem("highScoresStorage",JSON.stringify(highScoresListCurrent));
+    localStorage.setItem("highScoresStorage", JSON.stringify(highScoresListCurrent));
 }
 
-// ------------------------------------------------
 // function clears the high scores
 function clearHighScores() {
     localStorage.clear();
 }
-// ------------------------------------------------
-
-
 
 // running functions when the user clicks the start button
-startButton.addEventListener("click",countdown);
-startButton.addEventListener("click",startQuiz);
-startButton.addEventListener("click",runQuiz);
+if(startButton) {
+    startButton.addEventListener("click",countdown);
+    startButton.addEventListener("click",startQuiz);
+    startButton.addEventListener("click",runQuiz);
+}
 
 // running functions when the user clicks any of the answer buttons
-answerButton0.addEventListener("click",checkAnswer);
-answerButton1.addEventListener("click",checkAnswer);
-answerButton2.addEventListener("click",checkAnswer);
-answerButton3.addEventListener("click",checkAnswer);
+// switch (startButton || answerButton0) {
+//     case startButton:
+//         startButton.addEventListener("click", countdown);
+//         startButton.addEventListener("click", startQuiz);
+//         startButton.addEventListener("click", runQuiz);
+//         break;
+//     case answerButton0:
+//         answerButton0.addEventListener("click", checkAnswer);
+//         answerButton1.addEventListener("click", checkAnswer);
+//         answerButton2.addEventListener("click", checkAnswer);
+//         answerButton3.addEventListener("click", checkAnswer);
+//         break;
+// }
+
+// answerButton0.addEventListener("click",checkAnswer);
+// answerButton1.addEventListener("click",checkAnswer);
+// answerButton2.addEventListener("click",checkAnswer);
+// answerButton3.addEventListener("click",checkAnswer);
 
 // running a function when the submit button is pressed
-submitButton.addEventListener("click",submitHighScores);
+// submitButton.addEventListener("click", submitHighScores);
 
 // running a function when the clear high scores button is pressed
-clearHighScoresButton.addEventListener("click",clearHighScores);
+if(clearHighScoresButton) {
+    clearHighScoresButton.addEventListener("click", clearHighScores);
+}
