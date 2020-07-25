@@ -19,31 +19,32 @@ Several divs have been introduced to organize and group content; all of these ut
 - The countdown timer also begins
 
 #### id="quizContent"
-- The javascript code loads the question and answer choices onto the page and into the buttons, respectively
-
-
-
-- Upon completion of the quiz...
-
-
+- This div is how the quiz itself gets displayed
+- The javascript code loads the question and answer choice buttons onto the page and into the buttons, respectively
+- This continues as the quiz cycles through the questions
+- Upon completion of the quiz - whether from finishing all the questions OR from time running out - the style of this div switches to "display:none" and the endContent loads
 
 #### id="endContent"
-
-
+- This div displays the score results of the quiz (aka, the time remaining)
+- It has also has a submission form, allowing the user to input their name, so that way it will get stored in conjunction with their score
+- Upon pushing the submit button, the high score is submitted and saved to localStorage
+- Upon pushing the submit button, the following also occurs: the style of this div switches to "display:none" and the restartContent loads 
 
 #### id="restartContent"
-
-
+- This div has two buttons
+- One button restarts the quiz - this is accomplished by simply reloading the html page
+- One button takes users to the high score page (a different html file)
 
 ### highscores.html
-
-Several divs
-Clearing the unordered list entirely
-
+- This page consists of several buttons: Retake Quiz OR Clear High Scores
+- This page also has a div where the high scores list will get populated
+- The javascript recalls the high scores from localStorage and displays them as an unordered list
+- Upon clicking the Retake Quiz button, the other html page is loaded
+- Upon clicking the Clear High Score button, localStorage is cleared AND the entire div containing the unordered list is removed (this is not an issue because upon reloading the page, the div still exists in the html, so it can be re-populated)
 
 ### style.css
-
-
+- No major items contained in the CSS
+- Just setting a background color for the body
 
 ### script2.js
 The bulk of the content for this application can be found in the script2 javascript file.
