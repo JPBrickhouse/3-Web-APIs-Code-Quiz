@@ -1,3 +1,4 @@
+// Variables concerning the question content and answer buttons / choices
 var questionNumberEl = document.querySelector("#questionNumber");
 var questionItselfEl = document.querySelector("#questionItself");
 
@@ -6,32 +7,38 @@ var answerButton1 = document.querySelector("#button1");
 var answerButton2 = document.querySelector("#button2");
 var answerButton3 = document.querySelector("#button3");
 
-var startButton = document.querySelector("#startButton");
-
 var answerChoice0 = document.querySelector("#choice0");
 var answerChoice1 = document.querySelector("#choice1");
 var answerChoice2 = document.querySelector("#choice2");
 var answerChoice3 = document.querySelector("#choice3");
 
+// Making an array from the answer choices
 var answerChoiceArray = [answerChoice0, answerChoice1, answerChoice2, answerChoice3];
 
+// Variables concerning the div content that will be displayed
+// at various points of the quiz
 var introContent = document.querySelector("#introContent");
 var quizContent = document.querySelector("#quizContent");
 var endContent = document.querySelector("#endContent");
 var restartContent = document.querySelector("#restartContent");
 
+// Variables for various buttons
+var startButton = document.querySelector("#startButton");
 var submitButton = document.querySelector("#submitButton");
-
 var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
+// Variable for the userInput (where they put their name)
 var userInput = document.querySelector("#userName");
 
+// Variable for displaying the high score list
 var highScoreIndex = document.querySelector("#highScoreIndex");
 
+// Variables pertaining to the countdown function
 var displayTime = document.querySelector("#time");
 var remainingTimeDisplay = document.querySelector("#remainingTime");
 var timeRemaining = 100;
 
+// Countdown timer function
 function countdown() {
     var timerCountdown = setInterval(function () {
         timeRemaining--;
@@ -119,6 +126,7 @@ var questions = [
     }
 ];
 
+// start the quiz
 function startQuiz() {
     // hides the introContent
     introContent.setAttribute("style", "display:none")
@@ -199,6 +207,7 @@ function checkAnswer(event) {
     }
 }
 
+// Content once the quiz ends
 function endRoutine() {
     // hides the quizContent
     quizContent.setAttribute("style", "display:none")
@@ -214,6 +223,7 @@ function endRoutine() {
     submitButton.addEventListener("click", submitHighScores);
 }
 
+// Function to submit the user's high score
 function submitHighScores() {
     // hides the endContent
     endContent.setAttribute("style", "display:none")
@@ -279,7 +289,7 @@ function renderHighScores() {
         else {
             highScoresListCurrent = JSON.parse(localStorage.getItem("highScoresStorage"));
         }
-        
+
         // Loop through the highScoresListCurrent and
         // append the content to highScoreIndex, a unordered list
         // div that exists on the highscores.html page
@@ -307,15 +317,29 @@ function clearHighScores() {
     // Clears the localStorage of all values (including the high scores list)
     localStorage.clear();
 
-
+    // initializing a variable named highScoreIndex
+    // corresponding to the underordered list (with the id="highScoreIndex")
     var highScoreIndex = document.getElementById("highScoreIndex");
-    highScoreIndex.parentNode.removeChild(highScoreIndex);
+
+    // if else statement to prevent an error...
+    // This checks if the list exists (i.e. it is empty or has content)
+    // OR if the list is null (i.e. it no longer exists because it has been cleared/deleted)
+    // The removeChild function doesn't work if the parentNode is null, so it just returns.
+    if (highScoreIndex === null) {
+        return;
+    }
+    // this removes the entire unordered list (with the id="highScoreIndex")
+    // from the html of the document...
+    // (In this application, this is okay, because re-loading the page
+    // puts back the html for the unordered list.)
+    else {
+        highScoreIndex.parentNode.removeChild(highScoreIndex);
+    }
 
     // render the high scores again
-    // (Acknowledging that the high scores are blank!)
+    // (Acknowledging that the high scores will not display because we cleared them!)
     renderHighScores();
 }
-
 
 // These eventListeners below are "global"
 // They are couched in if statements
