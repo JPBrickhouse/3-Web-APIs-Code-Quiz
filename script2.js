@@ -256,28 +256,34 @@ function submitHighScores() {
     localStorage.setItem("highScoresStorage", JSON.stringify(highScoresListCurrent));
 }
 
-//------------------------------------------------
-
 // function that renders the high scores
-function renderHighScores () {
+function renderHighScores() {
 
     // If the clearHighScoresButton is true (i.e. if it exists and is showing),
     // then continue with the rest of the function.
     // (Don't want this function running on the index.html page...
     // only on the highscores.html page)
     if (clearHighScoresButton) {
-        
+
         // Initializes an empty array
         var highScoresListCurrent = [];
 
+        // if the highScoresStorage in localStorage is null,
+        // then use the empty array initialized earlier
         if (localStorage.getItem("highScoresStorage") === null) {
             highScoresListCurrent;
         }
+        // else: this means that highScoresStorage has values
+        // Therefore, use getItem to get the highScoresStorage array from localStorage
+        // and make that array as the highScoresListCurrent array
         else {
             highScoresListCurrent = JSON.parse(localStorage.getItem("highScoresStorage"));
         }
-
-        for (var i=0 ; i < highScoresListCurrent.length; i++) {
+        
+        // Loop through the highScoresListCurrent and
+        // append the content to highScoreIndex, a unordered list
+        // div that exists on the highscores.html page
+        for (var i = 0; i < highScoresListCurrent.length; i++) {
             var userOutput = highScoresListCurrent[i].user
             var scoreOuput = highScoresListCurrent[i].score
 
@@ -294,18 +300,22 @@ function renderHighScores () {
 // then continue with the rest of the function
 renderHighScores();
 
-//------------------------------------------------
-
 
 // function clears the high scores
 function clearHighScores() {
+
+    // Clears the localStorage of all values (including the high scores list)
     localStorage.clear();
+
+
+    var highScoreIndex = document.getElementById("highScoreIndex");
+    highScoreIndex.parentNode.removeChild(highScoreIndex);
+
+    // render the high scores again
+    // (Acknowledging that the high scores are blank!)
     renderHighScores();
 }
-// Need to clear the list from the high scores page when the button is pushed, too
 
-
-//------------------------------------------------
 
 // These eventListeners below are "global"
 // They are couched in if statements
