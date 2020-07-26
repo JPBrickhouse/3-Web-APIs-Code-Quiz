@@ -71,56 +71,62 @@ function countdown() {
 var questions = [
     {
         questionNum: "1",
-        questionContent: "Question 1?",
+        questionContent: "In javascript, the if statement executes if a specified condition is...",
+        // Question taken from Mozilla documentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
         answerChoices: {
-            0: "Incorrect",
-            1: "Correct",
-            2: "Incorrect",
-            3: "Incorrect"
+            0: "Honest",
+            1: "Truthy",
+            2: "Factual",
+            3: "Falsy"
         },
         correctAnswer: 1
     },
     {
         questionNum: "2",
-        questionContent: "Question 2?",
+        questionContent: "Which is NOT an event type that addEventListener(type,listener) is listening for?",
+        // Question taken from Mozilla documentation: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+        // and https://developer.mozilla.org/en-US/docs/Web/Events
         answerChoices: {
-            0: "Incorrect",
-            1: "Incorrect",
-            2: "Correct",
-            3: "Incorrect"
+            0: "keyup",
+            1: "click",
+            2: "wiggle",
+            3: "ended"
         },
         correctAnswer: 2
     },
     {
         questionNum: "3",
-        questionContent: "Question 3?",
+        questionContent: "Which is NOT a CSS display property value?",
+        // Question taken from W3 schools: https://www.w3schools.com/cssref/pr_class_display.asp
         answerChoices: {
-            0: "Correct",
-            1: "Incorrect",
-            2: "Incorrect",
-            3: "Incorrect"
+            0: "grouping",
+            1: "inline",
+            2: "block",
+            3: "flex"
         },
         correctAnswer: 0
     },
     {
         questionNum: "4",
-        questionContent: "Question 4?",
+        questionContent: "What does the DOM stand for?",
+        // Question taken from Mozilla documentation: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
         answerChoices: {
-            0: "Incorrect",
-            1: "Incorrect",
-            2: "Incorrect",
-            3: "Correct"
+            0: "Document Orientation Method",
+            1: "Discovery Object Means",
+            2: "Discrete Observation Mission",
+            3: "Document Object Model"
         },
         correctAnswer: 3
     },
     {
         questionNum: "5",
-        questionContent: "Question 5?",
+        questionContent: "In order to replace the less than (<) symbol in html, what entity must be used?",
+        // Question taken from W3 schools: https://www.w3schools.com/html/html_entities.asp
         answerChoices: {
-            0: "Incorrect",
-            1: "Correct",
-            2: "Incorrect",
-            3: "Incorrect"
+            0: "&gt;",
+            1: "&lt;",
+            2: "&nbsp;",
+            3: "&amp;"
         },
         correctAnswer: 1
     }
