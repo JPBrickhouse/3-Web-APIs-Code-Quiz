@@ -14,7 +14,7 @@ We were tasked with creating an interactive quiz, consisting of multiple choice 
 ### Results
 ![Image of Results Page](./img/results.png)
 ### High Scores Page
-![Image of High Scores Page](./highscores.png)
+![Image of High Scores Page](./img/highscores.png)
 
 ## Overall Notes
 
