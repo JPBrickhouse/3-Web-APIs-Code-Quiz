@@ -3,6 +3,19 @@
 ## Homework 4 Introduction
 We were tasked with creating an interactive quiz, consisting of multiple choice questions. When the start button was pushed, a countdown timer would begin. Answering questions correctly would not impact the countdown timer, but answering questions incorrectly would subtract time from the countdown timer. The game would be end if all the questions were completed or if the countdown timer reached zero. Following completion of the game, the user could enter their name, which would be saved in conjunction with their score (which was the time remaining as they completed the quiz). This high score list could be viewed or cleared.
 
+## Deployed Application:
+### [https://jpbrickhouse.github.io/4-Web-APIs-Code-Quiz/](https://jpbrickhouse.github.io/4-Web-APIs-Code-Quiz/)
+
+## Screenshots
+### Starting the Quiz
+![Image of Quiz Start](./img/startquiz.png)
+### Sample Quiz Questions
+![Image of Sample Quiz Question](./img/quizquestion.png)
+### Results
+![Image of Results Page](./img/results.png)
+### High Scores Page
+![Image of High Scores Page](./highscores.png)
+
 ## Overall Notes
 
 ### index.html
